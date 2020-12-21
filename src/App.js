@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { connect } from "react-redux";
+import { fetchAll } from "./actions/storyActions";
 
-function App() {
+function App(props) {
+  const onButtonClick = () => {
+    props.fetchAll();
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={onButtonClick}>Click Me</button>
+      <h2>State Count: {props.count}</h2>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    count: state.storyReducer.count,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAll: () => {
+      dispatch(fetchAll());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
