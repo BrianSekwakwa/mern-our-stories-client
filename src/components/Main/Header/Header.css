@@ -1,0 +1,18 @@
+.header-container {
+  background: url("./Header-image.jpg");
+  background-color: rgba(42, 58, 66, 0.5);
+  background-blend-mode: color;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.header-container h1 {
+  margin-left: 0.5rem;
+  color: #ffffff;
+}

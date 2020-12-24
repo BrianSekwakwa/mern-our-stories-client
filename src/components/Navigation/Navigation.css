@@ -1,0 +1,22 @@
+nav {
+  background-color: #2b3a42;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ul {
+  margin: 0.75rem 0;
+  list-style: none;
+  display: inline-flex;
+  font-weight: bold;
+}
+
+ul span {
+  color: #ffffff;
+}
+
+ul li {
+  margin: 0 0.5rem;
+  cursor: pointer;
+  color: #ffffff;
+}
