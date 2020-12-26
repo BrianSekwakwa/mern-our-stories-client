@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Card, CardColumns } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import "./Stories.css";
+import { fetchAllStories } from "../../../actions/storyActions";
 
 export class Stories extends Component {
   constructor() {
@@ -54,9 +56,15 @@ export class Stories extends Component {
     };
   }
 
-  onHandleClick = () => {
-    console.log("I was clicked");
-  };
+  componentDidMount() {
+    const { fetchAllStories } = this.props;
+    fetchAllStories();
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.stories);
+  }
+
   render() {
     return (
       <div className="stories-container">
@@ -69,7 +77,10 @@ export class Stories extends Component {
                   <Card.Img variant="top" src={card.imgString} />
                   <Card.Body>
                     <Card.Title>{card.title}</Card.Title>
-                    <Card.Text>{card.body}</Card.Text>
+                    <Card.Text>
+                      <span>Likes: 0</span>
+                      <span>Dislikes: 0</span>
+                    </Card.Text>
                   </Card.Body>
                 </Card>
               </Link>
@@ -81,4 +92,18 @@ export class Stories extends Component {
   }
 }
 
-export default Stories;
+const mapStateToProps = (state) => {
+  return {
+    stories: state.storyReducer.stories,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllStories: () => {
+      dispatch(fetchAllStories());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stories);

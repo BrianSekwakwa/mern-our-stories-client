@@ -7,24 +7,28 @@ import Home from "./components/Main/Home";
 import CreateStory from "./components/Form/CreateStory";
 import EditStory from "./components/Form/EditStory";
 import Story from "./components/Main/Stories/Story/Story";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navigation />
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path="/create">
-        <CreateStory />
-      </Route>
-      <Route path="/edit">
-        <EditStory />
-      </Route>
-      <Route path="/story">
-        <Story />
-      </Route>
-    </BrowserRouter>
+    <div className="app-container">
+      <BrowserRouter>
+        <Navigation />
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/create">
+          <CreateStory />
+        </Route>
+        <Route path="/edit">
+          <EditStory />
+        </Route>
+        <Route path="/story">
+          <Story />
+        </Route>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

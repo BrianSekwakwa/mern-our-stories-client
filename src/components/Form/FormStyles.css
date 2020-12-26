@@ -1,0 +1,14 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+.form-container .form-header {
+  text-align: center;
+  padding-top: 2.5rem;
+}
+
+.form-container form {
+  margin-top: 2.5rem;
+}

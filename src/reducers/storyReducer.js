@@ -1,13 +1,9 @@
-const initState = {
-  count: 0,
-};
-
-const storyReducer = (state = initState, action) => {
+const storyReducer = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_ALL":
       return {
         ...state,
-        count: state.count + 1,
+        stories: action.payload,
       };
     default:
       return state;
