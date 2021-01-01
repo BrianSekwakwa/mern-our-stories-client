@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./Navigation.css";
 
 export default function Navigation() {
+  const onClickHandle = () => {
+    window.location = "/";
+  };
   return (
     <nav>
       <ul>
-        <Link to="/">
-          <li>Our Stories</li>
-        </Link>
+        <li onClick={onClickHandle}>Our Stories</li>
         <span>|</span>
         <Link to="/create">
           <li>Create Story</li>

@@ -1,17 +1,29 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import FileBase from "react-file-base64";
 import "./FormStyles.css";
+import { editStory, clearState } from "../../actions/storyActions";
 
 export class EditStory extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title: "",
       creator: "",
       story: "",
       image: "",
     };
+  }
+
+  componentDidMount() {
+    const { title, creator, story, image } = this.props.story;
+    this.setState({
+      title,
+      creator,
+      story,
+      image,
+    });
   }
   onChangeField = (e) => {
     const name = e.target.name;
@@ -25,12 +37,17 @@ export class EditStory extends Component {
   onHandleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(this.state);
+    const { editStory, story, clearState } = this.props;
+    const id = story._id;
+    clearState();
+    editStory(id, this.state);
+    window.location = "/";
   };
+
   render() {
     return (
       <div className="form-container">
-        <h2 className="form-header">Edit Your Story</h2>
+        <h2 className="form-header">Edit A Story</h2>
         <Form>
           {/* Creator */}
           <Form.Group controlId="formCreator">
@@ -38,8 +55,8 @@ export class EditStory extends Component {
             <Form.Control
               type="text"
               placeholder="Enter the author of the story"
-              required
               name="creator"
+              value={this.state.creator}
               onChange={this.onChangeField}
             />
           </Form.Group>
@@ -49,8 +66,8 @@ export class EditStory extends Component {
             <Form.Control
               type="text"
               placeholder="Enter the title of the story"
-              required
               name="title"
+              value={this.state.title}
               onChange={this.onChangeField}
             />
           </Form.Group>
@@ -60,10 +77,10 @@ export class EditStory extends Component {
             <Form.Control
               as="textarea"
               type="text"
-              required
               style={{ minHeight: "200px" }}
               placeholder="Tell us your story :)"
               name="story"
+              value={this.state.story}
               onChange={this.onChangeField}
             />
           </Form.Group>
@@ -92,4 +109,21 @@ export class EditStory extends Component {
   }
 }
 
-export default EditStory;
+const mapStateToProps = (state) => {
+  return {
+    story: state.storyReducer.story,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editStory: (id, story) => {
+      dispatch(editStory(id, story));
+    },
+    clearState: () => {
+      dispatch(clearState());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditStory);

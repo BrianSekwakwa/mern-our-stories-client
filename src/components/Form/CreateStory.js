@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import FileBase from "react-file-base64";
 import "./FormStyles.css";
-import { createStory } from "../../actions/storyActions";
+import { createStory, clearState } from "../../actions/storyActions";
 
 export class CreateStory extends Component {
   constructor(props) {
@@ -30,7 +30,8 @@ export class CreateStory extends Component {
     const { title, creator, image, story } = this.state;
 
     if (title && creator && image && story !== "") {
-      const { createStory } = this.props;
+      const { createStory, clearState } = this.props;
+      clearState();
       createStory(this.state);
       window.location = "/";
     } else {
@@ -104,6 +105,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createStory: (story) => {
       dispatch(createStory(story));
+    },
+    clearState: () => {
+      dispatch(clearState());
     },
   };
 };

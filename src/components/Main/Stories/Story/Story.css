@@ -1,0 +1,43 @@
+.story-container {
+  min-height: 83vh;
+}
+
+.story-styles .details {
+  margin-top: 2rem;
+  padding: 0 0.5rem;
+}
+
+.story-styles .details small {
+  display: block;
+  color: rgb(153, 153, 153);
+}
+
+.story-styles .details .body {
+  margin-top: 2rem;
+}
+.story-styles .details .buttons {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.story-styles .details .buttons i {
+  cursor: pointer;
+}
+
+.story-styles .details .buttons .like {
+  margin-right: 1.5rem;
+  color: rgb(46, 60, 255);
+}
+
+.story-styles .details .buttons .dislike {
+  margin-right: 1.5rem;
+  color: rgb(255, 40, 40);
+}
+
+.story-styles .details .buttons .edit-button {
+  margin-right: 0.5rem;
+}
+
+.story-styles .details button {
+  font-weight: bold;
+}

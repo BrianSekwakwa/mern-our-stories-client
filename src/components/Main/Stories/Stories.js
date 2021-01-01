@@ -1,59 +1,19 @@
 import React, { Component } from "react";
-import { Card, CardColumns } from "react-bootstrap";
+import { Card, CardColumns, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import moment from "moment";
 import "./Stories.css";
-import { fetchAllStories } from "../../../actions/storyActions";
+import {
+  fetchAllStories,
+  fetchStory,
+  clearStoryState,
+} from "../../../actions/storyActions";
 
 export class Stories extends Component {
   constructor() {
     super();
-    this.state = {
-      data: [
-        {
-          id: 1,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 2,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 3,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 4,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 5,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 6,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-        {
-          id: 7,
-          title: "Brian",
-          imgString: "",
-          body: "Some string over here",
-        },
-      ],
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -61,25 +21,70 @@ export class Stories extends Component {
     fetchAllStories();
   }
 
-  componentDidUpdate() {
-    console.log(this.props.stories);
-  }
+  onHandleClick = (id) => {
+    const { fetchStory, clearStoryState } = this.props;
+    clearStoryState();
+    fetchStory(id);
+  };
 
-  render() {
-    return (
-      <div className="stories-container">
-        <h2>Stories</h2>
+  stories = () => {
+    const { stories } = this.props;
+
+    if (stories && stories.length > 0) {
+      return (
         <CardColumns className="cards-container">
-          {this.state.data.map((card) => {
+          {stories.map((card) => {
             return (
-              <Link style={{ color: "inherit" }} to="/story" key={card.id}>
-                <Card onClick={this.onHandleClick} className="card-styles">
-                  <Card.Img variant="top" src={card.imgString} />
+              <Link style={{ color: "inherit" }} to="/story" key={card._id}>
+                <Card
+                  onClick={() => this.onHandleClick(card._id)}
+                  className="card-styles"
+                >
+                  <Card.Img variant="top" src={card.image} />
                   <Card.Body>
-                    <Card.Title>{card.title}</Card.Title>
-                    <Card.Text>
-                      <span>Likes: 0</span>
-                      <span>Dislikes: 0</span>
+                    <Card.Title style={{ marginBottom: 0 }}>
+                      {card.title}
+                    </Card.Title>
+                    <Card.Text
+                      as="small"
+                      style={{
+                        color: "rgb(153, 153, 153)",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {card.creator}
+                    </Card.Text>
+                    <Card.Text
+                      as="small"
+                      style={{
+                        marginLeft: "0.5rem",
+                        fontWeight: "bold",
+                        color: "rgb(153, 153, 153)",
+                      }}
+                    >
+                      &#8211;
+                    </Card.Text>
+                    <Card.Text
+                      as="small"
+                      style={{
+                        color: "rgb(153, 153, 153)",
+                        marginLeft: "0.5rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {moment(card.createdAt).format("DD MMM YYYY")}
+                    </Card.Text>
+                    <Card.Text
+                      style={{ marginTop: "1rem", fontWeight: "bold" }}
+                    >
+                      <span>
+                        <i className="fas fa-thumbs-up"></i>
+                        {` ${card.likeCount}`}
+                      </span>
+                      <span>
+                        <i className="fas fa-thumbs-down"></i>
+                        {` ${card.dislikeCount}`}
+                      </span>
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -87,6 +92,34 @@ export class Stories extends Component {
             );
           })}
         </CardColumns>
+      );
+    } else if (stories && stories.length <= 0) {
+      return (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "1.5rem",
+            fontSize: "1.2rem",
+          }}
+        >
+          There are no stories to be read.{" "}
+          <Link to="/create">Create a new story!</Link>
+        </div>
+      );
+    }
+
+    return (
+      <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+        <Spinner animation="border" />
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div className="stories-container">
+        <h1>Stories</h1>
+        {this.stories()}
       </div>
     );
   }
@@ -102,6 +135,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllStories: () => {
       dispatch(fetchAllStories());
+    },
+    fetchStory: (id) => {
+      dispatch(fetchStory(id));
+    },
+    clearStoryState: () => {
+      dispatch(clearStoryState());
     },
   };
 };

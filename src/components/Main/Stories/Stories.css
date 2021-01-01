@@ -1,8 +1,8 @@
 .stories-container {
-  padding-bottom: 2rem;
+  padding: 0rem 1rem 2rem 1rem;
 }
 
-.stories-container h2 {
+.stories-container h1 {
   text-align: center;
   padding-top: 2rem;
 }
@@ -17,9 +17,18 @@
 
 .stories-container .cards-container .card-styles {
   width: 18rem;
-  box-shadow: 0px 0px 5px 0px #2b3a42;
+  box-shadow: 0px 0px 2px 0px #2b3a42;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.stories-container .cards-container .card-styles span:first-child {
+  color: rgb(46, 60, 255);
+  margin-right: 1.25rem;
+}
+
+.stories-container .cards-container .card-styles span:last-child {
+  color: rgb(255, 40, 40);
 }
 
 .stories-container .cards-container .card-styles:hover {
@@ -27,13 +36,13 @@
   box-shadow: 0px 5px 10px 0px #2b3a42;
 }
 
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 639px) {
   .stories-container .cards-container {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
-@media (min-width: 600px) and (max-width: 900px) {
+@media (min-width: 640px) and (max-width: 960px) {
   .stories-container .cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
