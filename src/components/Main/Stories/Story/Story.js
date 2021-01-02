@@ -49,7 +49,7 @@ class Story extends Component {
         <div className="story-styles">
           <div style={styleObject}></div>
           <div className="details">
-            <h1>{story.title}</h1>
+            <h2>{story.title}</h2>
             <h4>{story.creator}</h4>
             <small>
               created at{" "}

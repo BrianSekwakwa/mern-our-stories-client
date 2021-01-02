@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/stories";
+const url = "https://our-stories-app.herokuapp.com/stories";
 
 // API Calls
 export const fetchStories = () => axios.get(url);
