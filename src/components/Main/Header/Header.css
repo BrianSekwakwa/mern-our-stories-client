@@ -1,6 +1,6 @@
 .header-container {
   background: url("./Header-image.jpg");
-  background-color: rgba(42, 58, 66, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   background-blend-mode: color;
   background-position: center;
   background-attachment: fixed;
@@ -10,9 +10,16 @@
   height: 70vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+  padding: 0 1rem;
 }
 
 .header-container h1 {
-  margin-left: 0.5rem;
-  color: #ffffff;
+  font-size: 3.5rem;
+}
+
+.header-container p {
+  font-size: 1.2rem;
 }
